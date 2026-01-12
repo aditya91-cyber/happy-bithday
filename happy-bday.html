@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{
+    min-height:100vh;
+    background:radial-gradient(circle at top,#ff9a9e,#fad0c4);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+/* FLOATING DECORATIONS */
+.balloons span{
+    position:absolute;
+    bottom:-120px;
+    font-size:30px;
+    animation:float 10s infinite ease-in;
+    opacity:0.9;
+}
+@keyframes float{
+    0%{transform:translateY(0)}
+    100%{transform:translateY(-120vh)}
+}
+
+/* Add multiple floating items */
+.balloons span:nth-child(1){left:5%; animation-delay:0s}
+.balloons span:nth-child(2){left:15%; animation-delay:1s}
+.balloons span:nth-child(3){left:25%; animation-delay:2s}
+.balloons span:nth-child(4){left:35%; animation-delay:3s}
+.balloons span:nth-child(5){left:45%; animation-delay:4s}
+.balloons span:nth-child(6){left:55%; animation-delay:5s}
+.balloons span:nth-child(7){left:65%; animation-delay:6s}
+.balloons span:nth-child(8){left:75%; animation-delay:7s}
+.balloons span:nth-child(9){left:85%; animation-delay:8s}
+.balloons span:nth-child(10){left:95%; animation-delay:9s}
+
+/* CARD */
+.card{
+    width:90%;
+    max-width:390px;
+    background:rgba(255,255,255,0.95);
+    border-radius:28px;
+    padding:22px;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(0,0,0,.3);
+    z-index:10;
+    animation:zoom 1s ease;
+}
+@keyframes zoom{
+    from{transform:scale(0.8);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+.hidden{display:none;}
+
+h1{
+    color:#ff2e63;
+    text-shadow:0 0 10px #ffb3c1;
+}
+p{color:#555;font-size:14px}
+
+/* INPUT & BUTTON */
+input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:30px;
+    border:1px solid #ddd;
+    text-align:center;
+}
+button{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(135deg,#ff2e63,#ff6f91);
+    color:white;
+    font-size:15px;
+    box-shadow:0 8px 20px rgba(255,46,99,.5);
+    cursor:pointer;
+}
+
+/* SLIDER */
+.slider{
+    height:190px;
+    overflow:hidden;
+    border-radius:18px;
+    margin:15px 0;
+    box-shadow:0 10px 25px rgba(0,0,0,.25);
+    position:relative;
+}
+.slides{
+    display:flex;
+    width:300%;
+    transition:transform 0.8s ease-in-out;
+}
+.slides img{
+    width:100%;
+    height:190px;
+    object-fit:cover;
+}
+
+/* Slider arrows */
+.arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    font-size:25px;
+    background:rgba(255,255,255,0.7);
+    padding:5px 10px;
+    border-radius:50%;
+    cursor:pointer;
+    user-select:none;
+}
+.arrow-left{left:10px;}
+.arrow-right{right:10px;}
+
+/* SHAYARI */
+.shayari p{
+    background:linear-gradient(135deg,#fff0f5,#ffe3ec);
+    padding:12px;
+    border-radius:16px;
+    margin:10px 0;
+    font-size:14px;
+    color:#c9184a;
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+}
+
+/* CONFETTI */
+.confetti{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+    z-index:20;
+}
+.confetti-piece{
+    position:absolute;
+    width:8px;
+    height:8px;
+    background-color:#ff2e63;
+    opacity:0.8;
+    transform:rotate(0deg);
+    animation:confetti-fall linear infinite;
+}
+@keyframes confetti-fall{
+    0%{transform:translateY(0) rotate(0deg);}
+    100%{transform:translateY(100vh) rotate(360deg);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- FLOATING BALLOONS & DECOR -->
+<div class="balloons">
+    <span>🎈</span><span>🎉</span><span>🎂</span><span>💖</span><span>🎊</span>
+    <span>✨</span><span>💝</span><span>🌟</span><span>🎀</span><span>❤️</span>
+</div>
+
+<!-- PAGE 1 -->
+<div class="card" id="page1">
+<h1>Birthday Lock 🎁</h1>
+<p>Special entry for special person 💝</p>
+
+<input id="name" placeholder="Aapna Name likhiye babe ji💖">
+<input id="dob" placeholder="Aapna DOB likhiye💖">
+
+<button onclick="verify()">Unlock Surprise 🔓</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="card hidden" id="page2">
+<h1 id="title"></h1>
+<p>Meri Duniya Ki Happy Birthday 🎂</p>
+
+<div class="slider">
+    <div class="slides" id="slides">
+        <img src="https://i.imgur.com/1Q9Z1Zm.png">
+        <img src="https://i.imgur.com/8Km9tLL.png">
+        <img src="https://i.imgur.com/2nCt3Sb.jpg">
+    </div>
+    <div class="arrow arrow-left" onclick="prevSlide()">&#10094;</div>
+    <div class="arrow arrow-right" onclick="nextSlide()">&#10095;</div>
+</div>
+
+<p>May you shine brighter every year forever ✨<br>
+Aapke hone se meri duniya roshan hai🥰<br>aur Aapka pyaar meri zindagi ka sabse khoobsurat tohfa😚<br>Happy Birthday meri jaan!🎁💐🧧🎂🎈"</p>
+<button onclick="goPage3()">Final Surprise 💖</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="card hidden" id="page3">
+<h1>Happy Birthday My Dear Love 🎉</h1>
+<p>My heart celebrates you today ❤️</p>
+
+<div class="shayari">
+<p>🌹 Aapka pyaar ne meri zindagi ko rangon se bhar diya<br>aur Aapke saath har din ek nayi khushi laata hai<br>Happy Birthday meri zindagi!🎁🎂🎈<br></p>
+<p>💖 Aap meri wife hi nahi,<br>Aap meri duniya hai.</p>
+<p>♾️ Aapke saath har pal ek nayi kahani hai<br>
+Aapke pyaar mein hi meri zindagi puri hai<br>
+Janamdin mubarak ho meri dear zindagi🎂🎈<br>
+Aapse hi meri har khushi, har muskaan hai. ❤️<br></p>
+</div>
+
+<p>Forever Yours 💞</p>
+</div>
+
+<!-- CONFETTI -->
+<div class="confetti" id="confetti"></div>
+
+<!-- MUSIC -->
+<audio id="bday-music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" autoplay loop></audio>
+
+<script>
+/* VERIFY DOB */
+function verify(){
+    let name=nameInput=document.getElementById("name").value.trim();
+    let dob=document.getElementById("dob").value.toLowerCase().trim();
+
+    if(!name||!dob){alert("Naam aur DOB bharo 😄");return;}
+
+    dob=dob.replace(/[,\/\-]/g," ").replace(/\s+/g," ");
+    const months={jan:1,january:1,feb:2,february:2,mar:3,march:3,apr:4,april:4,may:5,
+        jun:6,june:6,jul:7,july:7,aug:8,august:8,sep:9,september:9,
+        oct:10,october:10,nov:11,november:11,dec:12,december:12};
+
+    let d,m,y;
+    dob.split(" ").forEach(v=>{
+        if(v.length==4&&!isNaN(v))y=parseInt(v);
+        else if(months[v])m=months[v];
+        else if(!isNaN(v)&&v<=31)d=parseInt(v);
+    });
+
+    if(d===17&&m===1&&y===2007){
+        title.innerText="Happy Birthday Meri Wifey "+name+" 🎂";
+        page1.classList.add("hidden");
+        page2.classList.remove("hidden");
+    }else alert("DOB galat hai 😜");
+}
+
+/* SLIDER */
+let i=0;
+function showSlide(){
+    let s=document.getElementById("slides");
+    s.style.transform="translateX("+(-i*100)+"%)";
+}
+function nextSlide(){ i=(i+1)%3; showSlide(); }
+function prevSlide(){ i=(i+2)%3; showSlide(); }
+setInterval(()=>{ nextSlide(); },3000);
+
+/* PAGE NAVIGATION */
+function goPage3(){
+    page2.classList.add("hidden");
+    page3.classList.remove("hidden");
+    startConfetti();
+}
+
+/* CONFETTI */
+function startConfetti(){
+    const confettiContainer=document.getElementById("confetti");
+    for(let j=0;j<100;j++){
+        let c=document.createElement("div");
+        c.classList.add("confetti-piece");
+        c.style.left=Math.random()*100+"%";
+        c.style.backgroundColor=`hsl(${Math.random()*360},100%,70%)`;
+        c.style.animationDuration=(3+Math.random()*2)+"s";
+        c.style.width=(5+Math.random()*5)+"px";
+        c.style.height=c.style.width;
+        confettiContainer.appendChild(c);
+    }
+}
+</script>
+
+</body>
+</html>
