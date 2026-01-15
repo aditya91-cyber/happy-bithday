@@ -98,14 +98,14 @@ button{
 }
 .slides{
     display:flex;
-    width:300%;
     transition:transform 0.8s ease-in-out;
-    transform:translateX(0%);	
 }
+
 .slides img{
-    width:100%;
+    min-width:100%;   /* 🔥 MOST IMPORTANT */
     height:190px;
     object-fit:cover;
+    display:block;
 }
 
 /* Slider arrows */
@@ -187,9 +187,9 @@ button{
 
 <div class="slider">
     <div class="slides" id="slides">
-        <img src="./wifey.jpeg">
-        <img src="./wifey2.jpeg">
         <img src="./wifey4.jpg">
+        <img src="./wifey2.jpeg">
+        <img src="./wifey.jpeg">
     </div>
     <div class="arrow arrow-left" onclick="prevSlide()">&#10094;</div>
     <div class="arrow arrow-right" onclick="nextSlide()">&#10095;</div>
@@ -247,6 +247,8 @@ function verify(){
         title.innerText="Happy Birthday Meri Wifey "+name+" 🎂";
         page1.classList.add("hidden");
         page2.classList.remove("hidden");
+        i = 0;
+ 	showSlide();
     }else alert("DOB galat hai 😜");
 }
 
@@ -258,13 +260,15 @@ function showSlide(){
     s.style.transform = "translateX(" + (-i * 100) + "%)";
 }
 
+const totalSlides = document.querySelectorAll("#slides img").length;
+
 function nextSlide(){
-    i = (i + 1) % 3;
+    i = (i + 1) % totalSlides;
     showSlide();
 }
 
 function prevSlide(){
-    i = (i + 2) % 3;
+    i = (i - 1 + totalSlides) % totalSlides;
     showSlide();
 }
 
@@ -302,7 +306,6 @@ function startConfetti(){
 
 </body>
 </html>
-
 
 
 
